@@ -1,4 +1,13 @@
 
+你太善良》是香港歌手张智霖演唱的一首粤语歌，
+张惠妹放开你的头脑歌词下载_酷我 ...
+
+
+就两个文件 另外一个freebsd10 4 desktop 
+
+program/kindlereader 
+
+
  Official Mirrors
  https://www.freebsd.org/doc/handbook/eresources-web.html
  
@@ -32,6 +41,23 @@ gnome_enable="YES"
 
 
 
+vi /etc/fstab
+proc /proc procfs rw 0 0
+
+pkg install lxde-meta
+echo 'exec startlxde' >> ~/.xinitrc
+
+lxde 成功了 20170204pm 
+
+
+evan# vi ~/.xinitrc
+#exec startlxde
+exec /usr/local/bin/gnome-session
+
+
+
+
+
 ##这个是汉化
 vi ~/.xinitrc
 export LC_ALL=zh_CN.UTF-8
@@ -39,7 +65,85 @@ export LANGUAGE=zh_CN.UTF-8.UTF-8
 export LANG=zh_CN.UTF-8.UTF-8
 exec startlxde
 
+https://wiki.lxde.org/en/FreeBSD
 
+Installing Mate desktop on FreeBSD 11
+http://www.vpierre.it/installing-mate-desktop-on-freebsd-11/
+
+桌面相关的官方文档 
+https://www.freebsd.org/doc/handbook/x11-wm.html
+
+
+
+echo 'exec enlightenment_start'  >> ~/.xinitrc
+
+
+##xfce  这个也是成功了 字体好看  不过是英文的呢喃 加上汉化的就行了 
+ pkg install xfce
+ 
+#昨天今天就是少了这一步 看来要多提高英文水平哦 
+Unlike GNOME or KDE, Xfce does not provide its own login manager. In order to start Xfce from the command line by typing startx, first add its entry to ~/.xinitrc:
+
+% echo "exec /usr/local/bin/startxfce4 --with-ck-launch" > ~/.xinitrc 
+ 
+
+##gnome3 
+
+
+09:51
+pkg install gnome3
+
+
+echo 'exec gnome-session'  >> ~/.xinitrc
+
+
+多媒体 输入法什么的
+
+Sudo
+
+I also recommend installing sudo (pkg install sudo or found in /usr/ports/security/sudo). sudo is a tool for allowing regular users to use the elevated privileges of the super user (a.k.a. “root” or “su”).
+
+To use elevated privileges the username must belong to the group wheel. If this was not done during installation the username can be added to the group with the following command:
+
+# pw usermod <username> -G wheel
+
+Make sure to use a capital “G”. So if my username were “Jordan” I would execute:
+
+# pw usermod Jordan -G wheel
+
+You can view groups & their members in the file /etc/group:
+
+nano /etc/group
+
+The username must also be added to the sudoers file. Edit the file /usr/local/etc/sudoers. Find the line “root ALL=(ALL) ALL” & add a similar line using the username instead of root:
+
+##
+## User privilege specification
+##
+root ALL=(ALL) ALL
+Jordan ALL=(ALL) ALL
+
+Save the changes. Now you can log in with your username & execute commands with elevated privileges using sudo:
+
+$ login
+login: Jordan
+password:
+$ sudo pkg install nano
+password:
+
+
+
+d /usr/ports/java/intellij-pycharm/ && make install clean
+#To add the package:
+ pkg install intellij-pycharm
+
+https://www.freshports.org/java/intellij-pycharm/
+
+
+/usr/home/evan  /home/evan  有什么区别 
+
+
+**********************************
 
 
 步驟1.修改 portsnap 設定檔 (portsnap.conf)
