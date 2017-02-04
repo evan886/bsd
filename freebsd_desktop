@@ -1,0 +1,114 @@
+
+ Official Mirrors
+ https://www.freebsd.org/doc/handbook/eresources-web.html
+ 
+SERVERNAME=portsnap.FreeBSD.org
+SERVERNAME=portsnap.cn.FreeBSD.org
+
+portsnap fetch extract
+
+
+
+vi /etc/portsnap.conf
+SERVERNAME=portsnap.cn.FreeBSD.org
+
+
+pkg install   xorg  slim  enlightenment # gnome2
+
+# pkg install enlightenment
+# pkg install terminology
+
+
+
+sysrc  'hald_enable=YES'  'dbus_enable=YES'  'slim_enable=YES'   'enlightenment_enable=YES' #  'gdm_enable=YES'  
+
+
+vi /etc/rc.conf
+##添加以下内容
+hald_enable="YES"
+dbus_enable="YES"
+gdm_enable="YES"
+gnome_enable="YES"
+
+
+
+##这个是汉化
+vi ~/.xinitrc
+export LC_ALL=zh_CN.UTF-8
+export LANGUAGE=zh_CN.UTF-8.UTF-8
+export LANG=zh_CN.UTF-8.UTF-8
+exec startlxde
+
+
+
+
+步驟1.修改 portsnap 設定檔 (portsnap.conf)
+修改 portsnap 設定檔 (/etc/portsnap.conf) 將下載主機修改為離主機較近的 Portsnap Proxy Host
+
+ #vi /etc/portsnap.conf
+ SERVERNAME=portsnap.FreeBSD.org      //預設值
+ SERVERNAME=portsnap.tw.FreeBSD.org   //修改為離我們較近的主機
+ SERVERNAME=portsnap.webamp.cc        //或使用 Giga WebAMP 所提供的 Portsnap Proxy
+步驟2.更新 Port Tree
+第一次使用 Portsnap 時需先取得 Ports System 的 Snapshot 並解開，鍵入如下指令即可
+
+ #portsnap fetch extract
+日後要更新時 /usr/ports (Port Tree) 則執行如下指令即可
+
+ #portsnap fetch update      
+步驟3.查看 Ports Tree 是否更新
+執行完 Portsnap 更新 Ports Tree 後查看一下系統中的 Ports Tree 是否確實更新
+
+ #less /usr/ports/UPDATING                                 //查看 Ports Tree 更新說明檔
+ 20060212:                                                 //是否為較新的日期
+  AFFECTS: users of mail/dcc-dccd
+  AUTHOR: ehaupt@FreeBSD.org
+
+
+
+
+
+
+
+http://blog.linuxchina.net/?p=993
+
+https://www.freebsd.org/doc/handbook/x11-wm.html
+https://antumdeluge.wordpress.com/2014/07/19/how-to-install-freebsd/
+
+https://forums.freebsd.org/threads/57329/
+
+Installing Mate desktop on FreeBSD 11
+http://www.vpierre.it/installing-mate-desktop-on-freebsd-11/
+
+
+
+# Packages使用方法这个不能用了
+setenv PACKAGESITE http://mirrors.aliyun.com/freebsd/releases/i386/8.1-RELEASE/packages/Latest/
+pkg_add -r package #package为要安装的软件名
+
+                    http://mirrors.aliyun.com/freebsd/releases/arm64/11.0-RELEASE/packages/Latest/
+                    
+                    
+                    
+freenas Mount ext4 partition
+http://blog.linuxchina.net/?p=1782
+
+linux: mount UFS filesystem
+http://blog.linuxchina.net/?p=1776
+
+Linux® 用户的 FreeBSD 快速入门向导
+https://www.freebsd.org/doc/zh_CN/articles/linux-users/index.html
+
+
+
+
+https://freebsdchina.org/forum/topic_63558.html
+
+https://www.enlightenment.org/distros/freebsd-start
+
+https://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/updating-upgrading-portsnap.html
+
+https://www.trueos.org/handbook/preinstall.html
+
+
+
