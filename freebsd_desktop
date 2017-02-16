@@ -212,12 +212,21 @@ exec /usr/local/bin/gnome-session
 
 
 
-##这个是汉化
+##这个是汉化 在公司虚拟机试了也是可以汉化的 
 vi ~/.xinitrc
 export LC_ALL=zh_CN.UTF-8
 export LANGUAGE=zh_CN.UTF-8.UTF-8
 export LANG=zh_CN.UTF-8.UTF-8
 exec startlxde
+
+
+mate 
+$ cat .xinitrc 
+export LC_ALL=zh_CN.UTF-8
+export LANGUAGE=zh_CN.UTF-8.UTF-8
+export LANG=zh_CN.UTF-8.UTF-8
+exec mate-session
+
 
 https://wiki.lxde.org/en/FreeBSD
 
