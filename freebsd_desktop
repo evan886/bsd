@@ -30,6 +30,7 @@ To start fcitx with your desktop, just
 
 	cp /usr/local/share/applications/fcitx.desktop     ~/.config/autostart/
 
+fcitx-configtool
 
 You're currently running Fcitx with GUI, but fcitx-configtool couldn't be found, the package name is usually fcitx-config-gtk, fcitx-config-gtk3 or fcitx-configtool. Now it will open config file with default text editor.
 
