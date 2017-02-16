@@ -4,6 +4,38 @@ pkg install chinese/fcitx
 
 pkg install  zh-fcitx
 
+======================================================================
+Message from zh-fcitx-4.2.9.1_4:
+************************************************************************
+
+Remember to set the environment variable XMODIFIERS:
+
+	csh/tcsh:	setenv XMODIFIERS @im=fcitx
+	sh/bash:	export XMODIFIERS='@im=fcitx'
+
+For GTK+ programs, you may want to set:
+
+	csh/tcsh:	setenv GTK_IM_MODULE fcitx
+			setenv GTK3_IM_MODULE fcitx
+	sh/bash:	export GTK_IM_MODULE=fcitx
+			export GTK3_IM_MODULE=fcitx
+
+For Qt4 programs, we recommend you to use
+
+	qtconfig-qt4: /usr/ports/misc/qt4-qtconfig
+
+instead of to manually set QT4_IM_MODULE.
+
+To start fcitx with your desktop, just
+
+	cp /usr/local/share/applications/fcitx.desktop     ~/.config/autostart/
+
+
+You're currently running Fcitx with GUI, but fcitx-configtool couldn't be found, the package name is usually fcitx-config-gtk, fcitx-config-gtk3 or fcitx-configtool. Now it will open config file with default text editor.
+
+************************************************************************
+
+
 
 
 
