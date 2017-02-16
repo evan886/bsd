@@ -1,0 +1,155 @@
+
+1. 使用本地化语言
+用户级：
+修改用户根目录文件.login_conf：
+me:\
+        :lang=zh_CN.UTF-8:\
+        :setenv=LC_ALL=zh_CN.UTF-8:\
+        :setenv=LC_CTYPE=zh_CN.UTF-8:\
+        :setenv=LC_COLLATE=zh_CN.UTF-8:\
+        :setenv=LC_TIME=zh_CN.UTF-8:\
+        :setenv=LC_NUMERIC=zh_CN.UTF-8:\
+        :setenv=LC_MONETARY=zh_CN.UTF-8:\
+        :setenv=LC_MESSAGES=zh_CN.UTF-8:\
+        :charset=UTF-8:\
+        :xmodifiers="@im=FCITX":
+
+
+https://wiki.freebsdchina.org/doc/d/freebsd_desktop
+
+
+
+安装kde-i18n-zh_CN:
+
+#
+ . {} + \)' -- \* /usr/ports/devel/cmake-modules/work/stage/usr/local/share/cmake/Modules
+--: line 0: cd: too many arguments
+*** Error code 1
+
+Stop.
+make[5]: stopped in /usr/ports/devel/cmake-modules
+*** Error code 1
+
+Stop.
+make[4]: stopped in /usr/ports/devel/cmake
+*** Error code 1
+
+Stop.
+make[3]: stopped in /usr/ports/devel/cmake
+*** Error code 1
+
+Stop.
+make[2]: stopped in /usr/ports/chinese/fcitx
+*** Error code 1
+
+Stop.
+make[1]: stopped in /usr/ports/chinese/fcitx
+*** Error code 1
+
+Stop.
+make: stopped in /usr/ports/chinese/fcitx
+err on above 
+
+2. 输入法
+7.安装fcitx输入法：
+1).#cd /usr/ports/chinese/fcitx
+2)#make install clean
+3).修改~/.profile,添加:
+LANG=zh_CN.EUC
+LC_ALL=zh_CN.EUC
+export LANG LC_ALL
+4).我用csh所以：
+#setenv LC_ALL zh_CN.EUC
+#setenv LANG zh_CN.EUC
+如果用的是bash则相应的为
+#LANG=zh_CN.EUC
+#LC_ALL=zh_CN.EUC
+#export LANG LC_ALL
+5).在~/.cshrc中加入：
+setenv LC_ALL zh_CN.EUC
+setenv LANG zh_CN.EUC
+6).修改~/.xinitrc及~/.xsession.均添加：
+export XMODIFIERS=@im=fcitx
+fcitx&
+至文件的开头处。
+
+第 24 章 本地化－I18N/L10N使用和设置
+https://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/using-localization.html
+
+
+第 24 章 本地化－I18N/L10N使用和设置	 下一页
+://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/lang-setup.html
+
+
+###fvwm 
+FreeBSD汉化+FVWM
+http://zqscm.qiniucdn.com/data/20090728100241/index.html
+
+1 中文环境
+  pkg_add -r zh-auto-ch-l10n
+  这个命令好像作了不少事情，我忘记是否下载了wenquanyi字体，没有的话，再手动来一遍
+　pkg_add -r wqy
+  下边的不知道是不是必须的
+　　在设置好xorg.conf中fontpath的前题下，执行
+   fc-cache -fv，让系统加入wqy字体
+  输入法如果没下载的话，可以
+　pkg_add -r fcitx,我是用五笔的
+　然后，配置中文的locale
+
+
+  在~/.chsrc里，增加
+　setenv LANG zh_CN.eucCN
+  setenv LC_CTYPE zh_CN.eucCN
+ setenv LC_ALL zh_CN.eucCN
+  上边是中文local，lc_all好像不是必须要设置的
+　下边设置输入法
+  setenv XMODIFIERS @im=fcitx
+
+2 fvwm，这个东西小快，够用了
+  pkg_add -r fvwm
+
+3 使用fvwm作为桌面
+  在~下，找一下有没有.xinitrc文件，没有就搞一个出来
+　　内容是
+　　exec fvwm
+  如果要输入法也一并启动则为
+　　fcitx&
+    exec fvwm
+
+
+
+
+更改freebsd shell为bash
+pkg install bash
+
+cd /urs/ports/shells/bash
+make install clean
+
+
+第二设置bash
+evan# whereis bash
+bash: /usr/local/bin/bash /usr/local/man/man1/bash.1.gz
+
+sudo mv /bin/sh /bin/bak_sh
+
+##做了下面这个ln 以后我们把平时在linux下跑的 shell 脚本拿到freebsd跑，也绝大部分没问题了
+ln -s /usr/local/bin/bash /bin/bash
+ln -s /usr/local/bin/bash /bin/sh
+
+tcsh -s /usr/local/bin/bash
+
+evan# chsh -s /usr/local/bin/bash
+chsh: user information updated
+注销重启后 如下 搞定
+[root@evan ~]# echo $SHELL
+/usr/local/bin/bash
+
+
+root@home:~ # where  vi
+/usr/bin/vi
+
+mv /usr/bin/vi /usr/bin/bakvi && ln -s /usr/local/bin/vim  /usr/bin/vi
+
+
+
+

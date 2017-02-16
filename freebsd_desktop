@@ -1,3 +1,23 @@
+
+#20170116pm
+pkg install chinese/fcitx 
+
+pkg install  zh-fcitx
+
+
+
+
+
+fetch 获取数据
+extract 释放全部ports
+update 更新ports
+第一次使用可以 portsnap fetch extract
+以后使用可以 portsnap fetch update
+portsnap   extract;  portsnap update
+
+如果写在cron可以用 portsnap cron update
+
+
 FreeBSD 简明用户指南
 
 install gnome3  kde4 xfce etc 
@@ -5,6 +25,9 @@ https://www.freebsd.org/doc/handbook/x11-wm.html
 
 Browsers
 https://www.freebsd.org/doc/handbook/desktop-browsers.html
+pkg install firefox 
+pkg install swfdec-plugin
+
 
  MP3 Audio
 https://www.freebsd.org/doc/handbook/sound-mp3.html
@@ -70,72 +93,7 @@ https://github.com/ibus/ibus
 
 
 
-安装kde-i18n-zh_CN:
 
-7.安装fcitx输入法：
-1).#cd /usr/ports/chinese/fcitx
-2)#make install clean
-3).修改~/.profile,添加:
-LANG=zh_CN.EUC
-LC_ALL=zh_CN.EUC
-export LANG LC_ALL
-4).我用csh所以：
-#setenv LC_ALL zh_CN.EUC
-#setenv LANG zh_CN.EUC
-如果用的是bash则相应的为
-#LANG=zh_CN.EUC
-#LC_ALL=zh_CN.EUC
-#export LANG LC_ALL
-5).在~/.cshrc中加入：
-setenv LC_ALL zh_CN.EUC
-setenv LANG zh_CN.EUC
-6).修改~/.xinitrc及~/.xsession.均添加：
-export XMODIFIERS=@im=fcitx
-fcitx&
-至文件的开头处。
-
-第 24 章 本地化－I18N/L10N使用和设置
-https://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/using-localization.html
-
-
-第 24 章 本地化－I18N/L10N使用和设置	 下一页
-://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/lang-setup.html
-
-
-###fvwm 
-FreeBSD汉化+FVWM
-http://zqscm.qiniucdn.com/data/20090728100241/index.html
-
-1 中文环境
-  pkg_add -r zh-auto-ch-l10n
-  这个命令好像作了不少事情，我忘记是否下载了wenquanyi字体，没有的话，再手动来一遍
-　pkg_add -r wqy
-  下边的不知道是不是必须的
-　　在设置好xorg.conf中fontpath的前题下，执行
-   fc-cache -fv，让系统加入wqy字体
-  输入法如果没下载的话，可以
-　pkg_add -r fcitx,我是用五笔的
-　然后，配置中文的locale
-
-
-  在~/.chsrc里，增加
-　setenv LANG zh_CN.eucCN
-  setenv LC_CTYPE zh_CN.eucCN
- setenv LC_ALL zh_CN.eucCN
-  上边是中文local，lc_all好像不是必须要设置的
-　下边设置输入法
-  setenv XMODIFIERS @im=fcitx
-
-2 fvwm，这个东西小快，够用了
-  pkg_add -r fvwm
-
-3 使用fvwm作为桌面
-  在~下，找一下有没有.xinitrc文件，没有就搞一个出来
-　　内容是
-　　exec fvwm
-  如果要输入法也一并启动则为
-　　fcitx&
-    exec fvwm
 
 **********************
 
@@ -254,13 +212,17 @@ Unlike GNOME or KDE, Xfce does not provide its own login manager. In order to st
 
 
 09:51
-pkg install gnome3
+pkg install gnome3  vlc 
 
-
-echo 'exec gnome-session'  >> ~/.xinitrc
+have gdm can not add this 
+#echo 'exec gnome-session'  >> ~/.xinitrc
 
 
 多媒体 输入法什么的
+
+
+ http://download.fcitx-im.org/data/py_stroke-20121124.tar.gz
+
 
 
 安装ibus输入法
@@ -268,7 +230,23 @@ https://www.freebsdchina.org/forum/viewtopic.php?t=51175&sid=5bec15a709b887fc72f
  
 https://github.com/ibus/ibus/wiki
 方法一：
-pkg install zh-ibus-wubi
+
+cd /usr/ports/chinese/ibus-table-chinese/
+
+evan@home:/usr/ports/chinese/ibus-table-chinese % sudo make install clean 
+===>  zh-ibus-table-chinese-1.4.6_1 is marked as broken: Unfetchable (google
+code has gone away).
+*** Error code 1
+
+Stop.
+make: stopped in /usr/ports/chinese/ibus-table-chinese
+
+
+
+
+
+
+pkg install ibus  zh-ibus-wubi
 pkg install zh-ibus-table 
 
 pkg_add -r zh-ibus-pinyin
@@ -420,16 +398,18 @@ setenv XIM_ARGS "--daemonize --xim"
 
 
 
+pkg install sudo 
 
 
+visudo 
+## Same thing without a password
+ %wheel ALL=(ALL) NOPASSWD: ALL
 
+## Uncomment to allow members of group sudo to execute any command
+ %sudo ALL=(ALL) NOPASSWD: ALL
 
-
-
-
-
-
-
+or
+echo 'evan ALL=(ALL) NOPASSWD:NOPASSWD:ALL' >/usr/local/etc/sudoers
 
 
 sudo
@@ -459,17 +439,13 @@ Jordan ALL=(ALL) ALL
 
 Save the changes. Now you can log in with your username & execute commands with elevated privileges using sudo:
 
-$ login
-login: Jordan
-password:
-$ sudo pkg install nano
-password:
 
+IDE
+pkg install intellij-pycharm
+or 
 
-
-d /usr/ports/java/intellij-pycharm/ && make install clean
+cd /usr/ports/java/intellij-pycharm/ && make install clean
 #To add the package:
- pkg install intellij-pycharm
 
 https://www.freshports.org/java/intellij-pycharm/
 

@@ -1,0 +1,230 @@
+
+
+
+
+0. Browsers
+https://www.freebsd.org/doc/handbook/desktop-browsers.html
+
+
+1.# set time
+ ntpdate cn.pool.ntp.org
+
+
+2. 
+使用本地化语言
+方法一：Class Definitions
+# vim /etc/login.conf
+chinese:Chinese Users Account:\
+        :charset=UTF-8:\
+        :lang=zh_CN.UTF-8:\
+        :tc=default:
+:wq
+# cap_mkdb /etc/login.conf        (rebuilds the database file /etc/login.conf.db)
+pw usermod evan -L chinese        (修改 jacky 的 语言环境)
+pw useradd evan -L chinese   #     (添加 jacky 并使用中文)
+
+# pw usershow evan
+root@home:~ # pw usershow evan
+evan:$6$waoGw9Mv9agn4ip5$Uk2vMgCzjhDRyH8rPxIiYJ56.ISU.Z8Pbrjx6NI0N4DEq2BxePB9hivsghD8zizQs4HbGG3sHR1jMYIQgCSoW1:1001:1001:chinese:0:0:User &:/home/evan:/bin/tcsh
+
+# su - evan 
+evan@home:~ % locale
+
+LANG=zh_CN.UTF-8
+LC_CTYPE="zh_CN.UTF-8"
+LC_COLLATE="zh_CN.UTF-8"
+LC_TIME="zh_CN.UTF-8"
+LC_NUMERIC="zh_CN.UTF-8"
+LC_MONETARY="zh_CN.UTF-8"
+LC_MESSAGES="zh_CN.UTF-8"
+LC_ALL=
+
+fcitx 必须要把 local 设置成 zh_CN.UTF-8 才能正常使用吗
+
+3.
+
+Message from chromium-56.0.2924.87_1:
+For correct operation, shared memory support has to be enabled
+in Chromium by performing the following command as root :
+
+sysctl kern.ipc.shm_allow_removed=1
+
+To preserve this setting across reboots, append the following
+to /etc/sysctl.conf :
+
+kern.ipc.shm_allow_removed=1
+
+
+4.
+pkg install mate 
+gdm can login to mate 
+**************************************************************************
+Message from mate-1.12.0:
+**************************************************************************
+
+
+5. pkg install  git  sudo   #wqy 
+
+#echo 'evan ALL=(ALL) NOPASSWD:NOPASSWD:ALL' >/etc/sudoers.d/evan
+
+
+
+	pkg install fcitx fcitx-table-wbpy ttf-wqy-microhei ttf-wqy-zenhei
+
+
+
+安装文泉驿中文字体
+# cd /usr/ports/x11-fonts/wqy
+# make install clean
+
+ cd /usr/ports/textproc/ibus
+# make install clean
+# cd /usr/ports/textproc/ibus-table
+# make install clean
+# cd /usr/ports/chinese/ibus-pinyin
+
+
+
+
+
+
+
+py_stroke-20121124.tar.gz                      99% of  435 kB 3366  Bps 00m01s
+fetch: transfer timed out
+fetch: py_stroke-20121124.tar.gz appears to be truncated: 442060/445601 bytes
+=> Attempting to fetch http://distcache.FreeBSD.org/ports-distfiles/fcitx/py_stroke-20121124.tar.gz
+fetch: http://distcache.FreeBSD.org/ports-distfiles/fcitx/py_stroke-20121124.tar.gz: No address record
+=> Couldn't fetch it - please try to retrieve this
+=> port manually into /usr/ports/distfiles/fcitx and try again.
+*** Error code 1
+
+Stop.
+make[1]: stopped in /usr/ports/chinese/fcitx
+*** Error code 1
+
+Stop.
+make: stopped in /usr/ports/chinese/fcitx
+
+
+Available input method engines[edit]
+fcitx-anthy: A Japanese IME using the anthy engine[1]
+fcitx-googlepinyin: A Chinese IME using Google Pinyin which is ported from Android.
+fcitx-handwriting: A handwriting IME using Zinnia as its backend.
+fcitx-hangul: A Korean IME
+fcitx-keyboard: An IME based on keyboard layouts
+fcitx-kkc: Kana Kanji converter, a Japanese IME
+fcitx-mozc: A Japanese IME using the mozc engine[2]
+fcitx-pinyin: A Chinese IME
+fcitx-qw - Flexible Input Method Framework - QuWei engine
+fcitx-sunpinyin: A Chinese IME using Sunpinyin as its backend.
+fcitx-table: for many table-based Chinese IMEs, e.g. Wubi and Zhengma
+fcitx-unikey - A Vietnamese IME using the Unikey engine.[3]
+
+
+
+
+
+
+6. ide 
+ pkg install intellij-pycharm
+
+
+/usr/local/bin/python2
+
+Message from libinotify-20160505:
+============================================================================
+
+Libinotify functionality on FreeBSD is missing support for
+
+  - detecting a file being moved into or out of a directory within the
+    same filesystem
+  - certain modifications to a symbolic link (rather than the
+    file it points to.)
+
+in addition to the known limitations on all platforms using kqueue(2)
+where various open and close notifications are unimplemented.
+
+This means the following regression tests will fail:
+
+Directory notifications:
+   IN_MOVED_FROM
+   IN_MOVED_TO
+
+Open/close notifications:
+   IN_OPEN
+   IN_CLOSE_NOWRITE
+   IN_CLOSE_WRITE
+
+Symbolic Link notifications:
+   IN_DONT_FOLLOW
+   IN_ATTRIB
+   IN_MOVE_SELF
+   IN_DELETE_SELF
+
+Kernel patches to address the missing directory and symbolic link
+notifications are available from:
+
+https://github.com/libinotify-kqueue/libinotify-kqueue/tree/master/patches
+
+=============================================================================
+You might want to consider increasing the kern.maxfiles tunable if you plan
+to use this library for applications that need to monitor activity of a lot
+of files.
+
+If the default on your system is too low, add the following line to
+/boot/loader.conf, then reboot the system:
+
+    kern.maxfiles="25000"
+=============================================================================
+Message from openjdk8-8.112.16_2:
+======================================================================
+
+This OpenJDK implementation requires fdescfs(5) mounted on /dev/fd and
+procfs(5) mounted on /proc.
+
+If you have not done it yet, please do the following:
+
+	mount -t fdescfs fdesc /dev/fd
+	mount -t procfs proc /proc
+
+To make it permanent, you need the following lines in /etc/fstab:
+
+	fdesc	/dev/fd		fdescfs		rw	0	0
+	proc	/proc		procfs		rw	0	0
+
+======================================================================
+Message from intellij-pycharm-2016.3.2:
+There is experimental native (faster) file watching support which is
+disabled by default.  Currently there are problems with watching large
+trees.  To enable edit /usr/local/share/pycharm/bin/idea.properties and append
+
+      idea.filewatcher.disabled=false
+      idea.filewatcher.executable.path=/usr/local/intellij/bin/fsnotifier
+
+Only enable fsnotifier if your projects have < 600 files.
+
+
+
+
+
+11.
+
+ cat /etc/rc.conf
+clear_tmp_enable="YES"
+sendmail_enable="NONE"
+hostname="home"
+ifconfig_re0="DHCP"
+sshd_enable="YES"
+ntpd_enable="YES"
+# Set dumpdev to "AUTO" to enable crash dumps, "NO" to disable
+dumpdev="AUTO"
+dbus_enable="YES"
+hald_enable="YES"
+gdm_enable="YES"
+#slim_enable=yes
+gnome_enable="YES"
+#enlightenment_enable="YES"
+
+
+
+
