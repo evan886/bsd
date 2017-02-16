@@ -378,6 +378,8 @@ export QT_IM_MODULE="ibus"
 exec ibus-daemon -d -x &
 
 
+http://www.freshports.org/textproc/ibus
+
 https://cooltrainer.org/a-freebsd-desktop-howto/
 
 **************
