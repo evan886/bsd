@@ -24,6 +24,52 @@ https://antumdeluge.wordpress.com/2014/07/19/how-to-install-freebsd/
 http://bbs.watchstor.com/thread-274706-1-1.html
 
 
+#输入法 
+
+解决 FreeBSD10.0 Fctix 无法调出五笔输入法问题
+https://www.liurongxing.com/solve-freebsd10-0-fctix-wubi-input-method-can-not-be-recalled-problem.html
+
+在ports里安装的SCIM-table搞掂了
+
+２，编写~/.login_conf以配置用户locale
+me:\
+:lang=en_US.UTF-8:\
+:setenv=LC_CTYPE=zh_CN.UTF-8:\
+:charset=UTF-8:
+
+
+３，安装ibus中文输入法
+# cd /usr/ports/textproc/ibus
+# make install clean
+# cd /usr/ports/textproc/ibus-table
+# make install clean
+# cd /usr/ports/chinese/ibus-pinyin
+# make install clean
+% cd ~/
+https://github.com/ibus/ibus
+% fetch http://ibus.googlecode.com/files/ibus-table-wubi-1.2.0.20090715.tar.gz
+% tar zxvf ibus-table-wubi-1.2.0.20090715.tar.gz
+% cd ibus-table-wubi-1.2.0.20090715
+% ./configure
+% make
+# cp /home/zhu/ibus-table-wubi-1.2.0.20090715/tables/wubi86.db /usr/local/share/ibus-table/tables/
+# chmod 444 /usr/local/share/ibus-table/tables/wubi86.db
+# cp /home/zhu/ibus-table-wubi-1.2.0.20090715/icons/wubi86.svg /usr/local/share/ibus-table/icons/
+# chmod 444 /usr/local/share/ibus-table/icons/wubi86.svg
+% 进入用户桌面右击ibus图标可添加五笔输入法
+
+
+
+
+
+
+
+
+
+
+
+
+
 安装kde-i18n-zh_CN:
 
 7.安装fcitx输入法：
@@ -207,7 +253,151 @@ echo 'exec gnome-session'  >> ~/.xinitrc
 
 多媒体 输入法什么的
 
-Sudo
+
+安装ibus输入法
+https://www.freebsdchina.org/forum/viewtopic.php?t=51175&sid=5bec15a709b887fc72faa934267a654d
+ 
+https://github.com/ibus/ibus/wiki
+方法一：
+pkg install zh-ibus-wubi
+pkg install zh-ibus-table 
+
+pkg_add -r zh-ibus-pinyin
+
+自动安装ibus和拼音输入法
+
+ 
+
+方法二：
+
+1 # pkg_add -r ibus 安装ibus
+
+2 如下安装拼音输入法
+
+# whereis ibus-pinyin
+
+# ibus-pinyin: /usr/ports/chinese/ibus-pinyin
+
+# cd /usr/ports/chinese/ibus-pinyin
+
+# make install clean
+
+需时约30分钟
+
+ 
+
+设置启用ibus:
+
+1.设置locale为UTF-8字符集
+
+如果用csh或者tcsh, .cshrc 中增加
+
+setenv LANG zh_CN.UTF-8
+
+#桌面界面语言为中文 [如果remark掉，则桌面菜单等仍为英文]
+
+setenv LC_CTYPE zh_CN.UTF-8
+
+#locale的character type为UTF-8中文. [如果remark掉，将无法调出中文输入法]
+
+setenv LC_ALL zh_CN.UTF-8
+
+#暂不清楚，推测是locale各项设置改为中文 [remark掉无影响]
+
+ 
+
+如果用sh, .shrc中增加 [如果用bash, .bashrc中增加]
+
+export LANG=zh_CN.UTF-8
+
+#桌面界面语言为中文 [如果remark掉，则桌面菜单等仍为英文]
+
+export LC_ALL=zh_CN.UTF-8
+
+#locale的character type为UTF-8中文. [如果remark掉，将无法调出中文输入法]
+
+export LC_ALL=zh_CN.UTF-8
+
+#暂不清楚，推测是locale各项设置改为中文 [remark掉无影响]
+
+ 
+
+2.让ibus daemon随X一起启动
+
+.xinitrc中增加
+
+XIM=ibus
+
+GTK_IM_MODULE=ibus
+
+QT_IM_MODULE=xim
+
+XMODIFIERS=’@im=ibus’
+
+XIM_PROGRAM=”ibus-daemon”
+
+XIM_ARGS=”–daemonize –xim”
+
+ 
+
+[参考一里有下面的说明, 这部分干啥用的？没照做也ok了]
+
+.profile中添加
+
+export LC_ALL=zh_CN.UTF-8
+
+ 
+
+重启, startx, 在panel右击ibus图标->preferences->input method->select an input method->Chinese->pinyin, 点击Add, 点close.
+
+http://blog.shaogroup.com/freebsd-8-1%E6%A1%8C%E9%9D%A2%E5%AE%89%E8%A3%85gnome2-3-%E5%B9%B6%E4%BD%BF%E7%94%A8ibus%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95.html
+
+
+IBus
+IBus is a modern IME for Unix-like systems, allowing one to input CJK languages. Install the main IME from textproc/ibus as well as QT application support from textproc/ibus-qt.
+
+You’ll need one or more input methods once the IME itself is installed. Ports of interest:
+
+chinese/ibus-chewing - Chewing engine for IBus
+chinese/ibus-pinyin - The PinYin input method
+japanese/ibus-anthy - Anthy engine for IBus
+japanese/ibus-mozc - Mozc engine for IBus
+japanese/ibus-skk - SKK engine for IBus
+korean/ibus-hangul - Hangul engine for IBus
+textproc/ibus-kmfl - KMFL IMEngine for IBus framework
+textproc/ibus-m17n - The m17n IMEngine for IBus framework
+textproc/ibus-table - Table based IM framework for IBus
+Heavyweight desktop environments like GNOME or KDE will let you configure the input method graphically. In GNOME 2 and MATE, for example, you can open the IBus preferences from the Settings > Preferences menu. KDE/Qt users can enable it as the default IME in qtconfig-qt4.
+
+Lightweight window manager users like me can start it in .xinitrc:
+
+~/.xinitrc
+export XMODIFIERS="@im=ibus"
+export GTK_IM_MODULE="ibus"
+export QT_IM_MODULE="ibus"
+exec ibus-daemon -d -x &
+
+
+https://cooltrainer.org/a-freebsd-desktop-howto/
+
+**************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sudo
+https://wiki.freebsdchina.org/doc/s/sudo_with_sudo
 
 I also recommend installing sudo (pkg install sudo or found in /usr/ports/security/sudo). sudo is a tool for allowing regular users to use the elevated privileges of the super user (a.k.a. “root” or “su”).
 
