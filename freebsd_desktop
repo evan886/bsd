@@ -382,6 +382,31 @@ http://www.freshports.org/textproc/ibus
 
 https://cooltrainer.org/a-freebsd-desktop-howto/
 
+FreeBSD 10.1 安装 mate 配置
+http://www.jianshu.com/p/29ec115d1688#
+
+
+# ee ~/.xinitrc
+export lANG="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+export LC_CTYPE="zh_CN.UTF-8"
+export LC_COLLATE="zh_CN.UTF-8"
+export LC_TIME="zh_CN.UTF-8"
+export LC_NUMERIC="zh_CN.UTF-8"
+export LC_MONETARY="zh_CN.UTF-8"
+export LC_MESSAGES="zh_CN.UTF-8"
+exec mate-session
+
+//配置 cshrc 文件
+# ee .cshrc
+setenv XIM ibus
+setenv GTK_IM_MODULE ibus
+setenv QT_IM_MODULE xim
+setenv XMODIFIERS @im=ibus
+setenv XIM_PROGRAM ibus-daemon
+setenv XIM_ARGS "--daemonize --xim"
+
+
 **************
 
 

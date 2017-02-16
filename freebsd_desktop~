@@ -378,7 +378,12 @@ export QT_IM_MODULE="ibus"
 exec ibus-daemon -d -x &
 
 
+http://www.freshports.org/textproc/ibus
+
 https://cooltrainer.org/a-freebsd-desktop-howto/
+
+FreeBSD 10.1 安装 mate 配置
+http://www.jianshu.com/p/29ec115d1688#
 
 **************
 

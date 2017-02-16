@@ -1,0 +1,19 @@
+
+FreeBSD 11 pkg error : size mismatch, fetching from remote
+
+
+Proceed with this action? [y/N]: y
+Fetching caja-extensions-1.12.0.txz: 100%  142 KiB   8.1kB/s    00:18    
+pkg: cached package caja-extensions-1.12.0: size mismatch, fetching from remote
+Fetching caja-extensions-1.12.0.txz: 100%  142 KiB  11.2kB/s    00:13    
+pkg: cached package caja-extensions-1.12.0: size mismatch, cannot continue
+
+
+To solve this :
+
+Use the -f option to force the re-downloading of the repositories.
+
+sudo pkg update -f
+
+https://nexusnucleus.wordpress.com/2014/09/25/freebsd-10-pkg-error-size-mismatch-fetching-from-remote/
+
