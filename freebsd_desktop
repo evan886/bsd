@@ -1,13 +1,22 @@
 
 #20170116pm
 pkg install chinese/fcitx 
+pkg install chinese/fcitx-configtool
+pkg install chinese/fcitx-table-extra
+pkg install chinese/fcitx-ui-light
+pkg install chinese/f
+pkg install chinese/f
 
 pkg install  zh-fcitx
 
+
+ mkdir -p ~/.config/autostart/
+cp /usr/local/share/applications/fcitx.desktop     ~/.config/autostart/
+
+https://www.liurongxing.com/solve-freebsd10-0-fctix-wubi-input-method-can-not-be-recalled-problem.html
 ======================================================================
 Message from zh-fcitx-4.2.9.1_4:
 ************************************************************************
-
 Remember to set the environment variable XMODIFIERS:
 
 	csh/tcsh:	setenv XMODIFIERS @im=fcitx
@@ -17,8 +26,9 @@ For GTK+ programs, you may want to set:
 
 	csh/tcsh:	setenv GTK_IM_MODULE fcitx
 			setenv GTK3_IM_MODULE fcitx
-	sh/bash:	export GTK_IM_MODULE=fcitx
-			export GTK3_IM_MODULE=fcitx
+sh/bash:	
+export GTK_IM_MODULE=fcitx
+export GTK3_IM_MODULE=fcitx
 
 For Qt4 programs, we recommend you to use
 
@@ -35,6 +45,41 @@ fcitx-configtool
 You're currently running Fcitx with GUI, but fcitx-configtool couldn't be found, the package name is usually fcitx-config-gtk, fcitx-config-gtk3 or fcitx-configtool. Now it will open config file with default text editor.
 
 ************************************************************************
+
+
+
+安装flashplayer插件
+
+安装 nspluginwrapper
+cd /usr/ports/www/nspluginwrapper    
+make    
+make install
+安装 linux-c6-flashplugin11
+cd /usr/ports/www/linux-c6-flashplugin11   
+make  
+make install
+执行nspluginwrapper -v -a -i
+若报错Kernel too old, 执行命令sysctl compat.linux.osrelease=2.6.18
+修改/etc/sysctl.conf, 增加compat.linux.osrelease=2.6.18
+修改/etc/fstab
+linproc /usr/compat/linux/proc linprocfs rw 0 0
+备注
+
+安装步骤参考FreeBSD Handbook
+安装nspluginwrapper会安装linux_base-c6
+注意安装的版本
+
+
+FreeBSD从入门到放弃
+https://linxiaohui.gitbooks.io/notes-on-freebsd/content/
+
+
+
+
+
+
+
+
 
 
 

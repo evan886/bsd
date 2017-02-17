@@ -38,10 +38,42 @@ You're currently running Fcitx with GUI, but fcitx-configtool couldn't be found,
 
 
 
+安装flashplayer插件
+
+安装 nspluginwrapper
+cd /usr/ports/www/nspluginwrapper    
+make    
+make install
+安装 linux-c6-flashplugin11
+cd /usr/ports/www/linux-c6-flashplugin11   
+make  
+make install
+执行nspluginwrapper -v -a -i
+若报错Kernel too old, 执行命令sysctl compat.linux.osrelease=2.6.18
+修改/etc/sysctl.conf, 增加compat.linux.osrelease=2.6.18
+修改/etc/fstab
+linproc /usr/compat/linux/proc linprocfs rw 0 0
+备注
+
+安装步骤参考FreeBSD Handbook
+安装nspluginwrapper会安装linux_base-c6
+注意安装的版本
+
+
+FreeBSD从入门到放弃
+
+
+
+
+
+
+
+
+
 
 
 How to Install FreeBSD 10.2 with Mate Desktop
-
+http://linoxide.com/linux-how-to/install-freebsd-10-2-mate-desktop/
 
 
 
