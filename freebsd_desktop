@@ -1,5 +1,12 @@
 rsync  -avzP --progress  evanlai/  192.168.1.101:/home/evan/kalibak/ 2>&1  | tee  logtobsd.log  
 
+evan@home:~ % cat .xinitrc 
+export LC_ALL=zh_CN.UTF-8
+export LANGUAGE=zh_CN.UTF-8.UTF-8
+export LANG=zh_CN.UTF-8.UTF-8
+export XMODIFIERS='@im=fcitx'	
+export GTK_IM_MODULE=fcitx
+export GTK3_IM_MODULE=fcitx
 
 
 
