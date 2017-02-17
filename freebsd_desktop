@@ -1,3 +1,7 @@
+rsync  -avzP --progress  evanlai/  192.168.1.101:/home/evan/kalibak/ 2>&1  | tee  logtobsd.log  
+
+
+
 
 #20170117pm
 ##记得 一定要加上chinese/ 不然是pkg 不到东西的
@@ -93,7 +97,11 @@ https://linxiaohui.gitbooks.io/notes-on-freebsd/content/
 
 
 
+develop python 
 
+pkg install  python
+https://docs.python.org/2.7/using/unix.html
+https://docs.python.org/3.3/using/unix.html
 
 
 How to Install FreeBSD 10.2 with Mate Desktop
@@ -182,7 +190,8 @@ https://github.com/ibus/ibus
 
 
 
-
+==ops==
+pkg install rsync  
 
 
 
