@@ -1,72 +1,61 @@
 rsync  -avzP --progress  evanlai/  192.168.1.101:/home/evan/kalibak/ 2>&1  | tee  logtobsd.log  
 
 
-no portnaps etc 
-    pkg install xf86-video-fbdev mate-desktop mate xorg
+在kali 向bsd添加pub key 然后还是登录不了
+van@evankali:~/.ssh$ ssh -i id_rsa 192.168.1.11
+sign_and_send_pubkey: signing failed: agent refused operation
+Password for evan@homebsd:
+
+
+==0基本系统已安装 没有gui==
 
 
 
+==1 安装 gui 相关==
+=== 安装===
+不用 portnaps 直接pkg 
+
+#昨晚这个默认居然是没有cn的 我去 搞半天  
 vi /etc/portsnap.conf
 SERVERNAME=portsnap.cn.FreeBSD.org
 
 
-pkg install   xorg  slim  enlightenment # gnome2
+#不安装gnome3 好像就没有gdm 
+pkg install xorg mate 
+#pkg install xf86-video-fbdev mate-desktop mate xorg
+
+#pkg install   xorg  slim  enlightenment # gnome2
 
 # pkg install enlightenment
 # pkg install terminology
 
-
-
-sysrc  'hald_enable=YES'  'dbus_enable=YES'  'slim_enable=YES'   'enlightenment_enable=YES' 'lxde-meta_enable=YES' #  'gdm_enable=YES'  
-
-
-vi /etc/rc.conf
-##添加以下内容
-hald_enable="YES"
-dbus_enable="YES"
-gdm_enable="YES"
-gnome_enable="YES"
-
-
-
-##设置gnome
-
-vi /etc/rc.conf
-##添加以下内容
-hald_enable="YES"
-dbus_enable="YES"
-gdm_enable="YES"
-gnome_enable="YES"
+===配置===
 
 vi /etc/fstab
 proc /proc procfs rw 0 0
 
-evan# vi ~/.xinitrc
-#exec startlxde
-exec /usr/local/bin/gnome-session
+sysrc  'hald_enable=YES'  'dbus_enable=YES'    'gdm_enable=YES' 
 
-##安装lxde
-http://wiki.lxde.org/en/FreeBSD
 
-pkg_add -r lxde-meta
-echo ‘exec startlxde’ > ~/.xinitrc
-
-##这个是汉化
-vi ~/.xinitrc
+汉化  第一次失败了 第二再重装一下又好了
+$ vi  .xinitrc 
 export LC_ALL=zh_CN.UTF-8
 export LANGUAGE=zh_CN.UTF-8.UTF-8
 export LANG=zh_CN.UTF-8.UTF-8
-exec startlxde
+#exec mate-session 不用这个 mate 默认没有gdm了 如果用slim 还是要用这个
+
+sysrc 'slim_enable=YES'
+
+===输入法===
+
+==== install ====
+##记得 一定要加上chinese/ 不然是pkg 不到东西的
+pkg install chinese/fcitx 
+
+pkg install chinese/fcitx  chinese/fcitx-configtool chinese/fcitx-table-extra  chinese/fcitx-ui-light
 
 
-
-
-
-
-
-
-
-
+==== configure ====
 evan@home:~ % cat .xinitrc 
 export LC_ALL=zh_CN.UTF-8
 export LANGUAGE=zh_CN.UTF-8.UTF-8
@@ -75,63 +64,36 @@ export XMODIFIERS='@im=fcitx'
 export GTK_IM_MODULE=fcitx
 export GTK3_IM_MODULE=fcitx
 
-
-
-#20170117pm
-##记得 一定要加上chinese/ 不然是pkg 不到东西的
-pkg install chinese/fcitx 
-
-pkg install chinese/fcitx-configtool chinese/fcitx-table-extra  chinese/fcitx-ui-light
-
-Replace your `fcitx` command with
-	fcitx -u fcitx-light-ui
-to start Fcitx with this lightweight UI.
-
-
-
-
-pkg install chinese/fcitx-table-extra
-pkg install chinese/fcitx-ui-light
-
-
-pkg install  zh-fcitx
-
-
  mkdir -p ~/.config/autostart/
 cp /usr/local/share/applications/fcitx.desktop     ~/.config/autostart/
 
-https://www.liurongxing.com/solve-freebsd10-0-fctix-wubi-input-method-can-not-be-recalled-problem.html
-======================================================================
-Message from zh-fcitx-4.2.9.1_4:
-************************************************************************
-Remember to set the environment variable XMODIFIERS:
 
-	csh/tcsh:	setenv XMODIFIERS @im=fcitx
-	sh/bash:	export XMODIFIERS='@im=fcitx'
+faded
+here
 
-For GTK+ programs, you may want to set:
+==Browsers==
 
-	csh/tcsh:	setenv GTK_IM_MODULE fcitx
-			setenv GTK3_IM_MODULE fcitx
-sh/bash:	
-export GTK_IM_MODULE=fcitx
-export GTK3_IM_MODULE=fcitx
+https://www.freebsd.org/doc/handbook/desktop-browsers.html
 
-For Qt4 programs, we recommend you to use
+pkg install   chromium  firefox 
 
-	qtconfig-qt4: /usr/ports/misc/qt4-qtconfig
+## log 
+Message from chromium-56.0.2924.87_1:
+For correct operation, shared memory support has to be enabled
+in Chromium by performing the following command as root :
 
-instead of to manually set QT4_IM_MODULE.
+sysctl kern.ipc.shm_allow_removed=1
 
-To start fcitx with your desktop, just
+To preserve this setting across reboots, append the following
+to /etc/sysctl.conf :
 
-	cp /usr/local/share/applications/fcitx.desktop     ~/.config/autostart/
+kern.ipc.shm_allow_removed=1
 
-fcitx-configtool
 
-You're currently running Fcitx with GUI, but fcitx-configtool couldn't be found, the package name is usually fcitx-config-gtk, fcitx-config-gtk3 or fcitx-configtool. Now it will open config file with default text editor.
 
-************************************************************************
+
+
+
 
 FreeBSD as a Host with VirtualBox
 https://www.freebsd.org/doc/handbook/virtualization-host-virtualbox.html
@@ -182,7 +144,10 @@ How to Install FreeBSD 10.2 with Mate Desktop
 http://linoxide.com/linux-how-to/install-freebsd-10-2-mate-desktop/
 
 
+https://wiki.lxde.org/en/FreeBSD
 
+Installing Mate desktop on FreeBSD 11
+http://www.vpierre.it/installing-mate-desktop-on-freebsd-11/
 
 fetch 获取数据
 extract 释放全部ports
@@ -335,18 +300,7 @@ export LANG=zh_CN.UTF-8.UTF-8
 exec startlxde
 
 
-mate 
-$ cat .xinitrc 
-export LC_ALL=zh_CN.UTF-8
-export LANGUAGE=zh_CN.UTF-8.UTF-8
-export LANG=zh_CN.UTF-8.UTF-8
-exec mate-session
 
-
-https://wiki.lxde.org/en/FreeBSD
-
-Installing Mate desktop on FreeBSD 11
-http://www.vpierre.it/installing-mate-desktop-on-freebsd-11/
 
 桌面相关的官方文档 
 https://www.freebsd.org/doc/handbook/x11-wm.html

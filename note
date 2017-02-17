@@ -2,12 +2,46 @@
 
 
 
-0. Browsers
-https://www.freebsd.org/doc/handbook/desktop-browsers.html
+#sysrc  'slim_enable=YES'   'enlightenment_enable=YES' 'lxde-meta_enable=YES'  
 
 
 1.# set time
  ntpdate cn.pool.ntp.org
+ 
+ 
+ 
+ 
+vi /etc/rc.conf
+##添加以下内容
+hald_enable="YES"
+dbus_enable="YES"
+gdm_enable="YES"
+gnome_enable="YES"
+
+
+
+##设置gnome
+
+vi /etc/rc.conf
+##添加以下内容
+hald_enable="YES"
+dbus_enable="YES"
+gdm_enable="YES"
+gnome_enable="YES"
+
+vi /etc/fstab
+proc /proc procfs rw 0 0
+
+evan# vi ~/.xinitrc
+#exec startlxde
+exec /usr/local/bin/gnome-session
+
+##安装lxde
+http://wiki.lxde.org/en/FreeBSD
+
+
+
+
 
 
 2. 
@@ -225,6 +259,58 @@ gdm_enable="YES"
 gnome_enable="YES"
 #enlightenment_enable="YES"
 
+
+
+fcitx about 
+#20170117pm
+
+
+Replace your `fcitx` command with
+	fcitx -u fcitx-light-ui
+to start Fcitx with this lightweight UI.
+
+
+
+
+pkg install chinese/fcitx-table-extra
+pkg install chinese/fcitx-ui-light
+
+
+pkg install  zh-fcitx
+
+
+
+
+https://www.liurongxing.com/solve-freebsd10-0-fctix-wubi-input-method-can-not-be-recalled-problem.html
+======================================================================
+Message from zh-fcitx-4.2.9.1_4:
+************************************************************************
+Remember to set the environment variable XMODIFIERS:
+
+	csh/tcsh:	setenv XMODIFIERS @im=fcitx
+	sh/bash:	export XMODIFIERS='@im=fcitx'
+
+For GTK+ programs, you may want to set:
+
+	csh/tcsh:	setenv GTK_IM_MODULE fcitx
+			setenv GTK3_IM_MODULE fcitx
+sh/bash:	
+export GTK_IM_MODULE=fcitx
+export GTK3_IM_MODULE=fcitx
+
+For Qt4 programs, we recommend you to use
+
+	qtconfig-qt4: /usr/ports/misc/qt4-qtconfig
+
+instead of to manually set QT4_IM_MODULE.
+
+To start fcitx with your desktop, just
+
+	cp /usr/local/share/applications/fcitx.desktop     ~/.config/autostart/
+
+fcitx-configtool
+
+You're currently running Fcitx with GUI, but fcitx-configtool couldn't be found, the package name is usually fcitx-config-gtk, fcitx-config-gtk3 or fcitx-configtool. Now it will open config file with default text editor.
 
 
 
