@@ -2,11 +2,19 @@
 #20170117pm
 ##记得 一定要加上chinese/ 不然是pkg 不到东西的
 pkg install chinese/fcitx 
-pkg install chinese/fcitx-configtool
+
+pkg install chinese/fcitx-configtool chinese/fcitx-table-extra  chinese/fcitx-ui-light
+
+Replace your `fcitx` command with
+	fcitx -u fcitx-light-ui
+to start Fcitx with this lightweight UI.
+
+
+
+
 pkg install chinese/fcitx-table-extra
 pkg install chinese/fcitx-ui-light
-pkg install chinese/f
-pkg install chinese/f
+
 
 pkg install  zh-fcitx
 
@@ -588,7 +596,19 @@ pkg_add -r package #package为要安装的软件名
 
                     http://mirrors.aliyun.com/freebsd/releases/arm64/11.0-RELEASE/packages/Latest/
                     
-                    
+          
+
+== == 
+fstab
+
+evan@home:~/github/bsd % cat /etc/fstab 
+# Device	Mountpoint	FStype	Options	Dump	Pass#
+proc           /proc       procfs  rw  0   0
+/dev/ada0p1	none		swap	sw	0	0
+/dev/ada0p3	/		ufs	rw	1	1
+/dev/ada0p4	/home/evaan		ufs	rw	2	2
+
+== ==          
                     
 freenas Mount ext4 partition
 http://blog.linuxchina.net/?p=1782
