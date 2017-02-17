@@ -1,5 +1,72 @@
 rsync  -avzP --progress  evanlai/  192.168.1.101:/home/evan/kalibak/ 2>&1  | tee  logtobsd.log  
 
+
+no portnaps etc 
+    pkg install xf86-video-fbdev mate-desktop mate xorg
+
+
+
+vi /etc/portsnap.conf
+SERVERNAME=portsnap.cn.FreeBSD.org
+
+
+pkg install   xorg  slim  enlightenment # gnome2
+
+# pkg install enlightenment
+# pkg install terminology
+
+
+
+sysrc  'hald_enable=YES'  'dbus_enable=YES'  'slim_enable=YES'   'enlightenment_enable=YES' 'lxde-meta_enable=YES' #  'gdm_enable=YES'  
+
+
+vi /etc/rc.conf
+##添加以下内容
+hald_enable="YES"
+dbus_enable="YES"
+gdm_enable="YES"
+gnome_enable="YES"
+
+
+
+##设置gnome
+
+vi /etc/rc.conf
+##添加以下内容
+hald_enable="YES"
+dbus_enable="YES"
+gdm_enable="YES"
+gnome_enable="YES"
+
+vi /etc/fstab
+proc /proc procfs rw 0 0
+
+evan# vi ~/.xinitrc
+#exec startlxde
+exec /usr/local/bin/gnome-session
+
+##安装lxde
+http://wiki.lxde.org/en/FreeBSD
+
+pkg_add -r lxde-meta
+echo ‘exec startlxde’ > ~/.xinitrc
+
+##这个是汉化
+vi ~/.xinitrc
+export LC_ALL=zh_CN.UTF-8
+export LANGUAGE=zh_CN.UTF-8.UTF-8
+export LANG=zh_CN.UTF-8.UTF-8
+exec startlxde
+
+
+
+
+
+
+
+
+
+
 evan@home:~ % cat .xinitrc 
 export LC_ALL=zh_CN.UTF-8
 export LANGUAGE=zh_CN.UTF-8.UTF-8
@@ -240,26 +307,6 @@ portsnap fetch extract
 
 
 
-vi /etc/portsnap.conf
-SERVERNAME=portsnap.cn.FreeBSD.org
-
-
-pkg install   xorg  slim  enlightenment # gnome2
-
-# pkg install enlightenment
-# pkg install terminology
-
-
-
-sysrc  'hald_enable=YES'  'dbus_enable=YES'  'slim_enable=YES'   'enlightenment_enable=YES' 'lxde-meta_enable=YES' #  'gdm_enable=YES'  
-
-
-vi /etc/rc.conf
-##添加以下内容
-hald_enable="YES"
-dbus_enable="YES"
-gdm_enable="YES"
-gnome_enable="YES"
 
 
 
