@@ -70,7 +70,8 @@ cp /usr/local/share/applications/fcitx.desktop     ~/.config/autostart/
 
 faded
 here
-
+== develop ==
+pkg install git 
 ==Browsers==
 
 https://www.freebsd.org/doc/handbook/desktop-browsers.html
