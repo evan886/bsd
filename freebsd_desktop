@@ -1,5 +1,6 @@
 
-#20170116pm
+#20170117pm
+##记得 一定要加上chinese/ 不然是pkg 不到东西的
 pkg install chinese/fcitx 
 pkg install chinese/fcitx-configtool
 pkg install chinese/fcitx-table-extra
