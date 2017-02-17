@@ -47,7 +47,9 @@ You're currently running Fcitx with GUI, but fcitx-configtool couldn't be found,
 
 ************************************************************************
 
-
+FreeBSD as a Host with VirtualBox
+https://www.freebsd.org/doc/handbook/virtualization-host-virtualbox.html
+https://wiki.freebsd.org/VirtualBox
 
 安装flashplayer插件
 
