@@ -8,16 +8,12 @@ git commit -m  "`date`"  #"dbbak and cutnglog"
 git push  origin master 
 #git push 
 
-
 #有时记得要删除
 # 位于分支 master
 # 尚未暂存以备提交的变更：
 #   （使用 "git add/rm <file>..." 更新要提交的内容）
 #   （使用 "git checkout -- <file>..." 丢弃工作区的改动）
-#
 #   删除：      document/plan
 #   删除：      document/plan~
-#
 #修改尚未加入提交（使用 "git add" 和/或 "git commit -a"）
-#Everything up-to-date
 
