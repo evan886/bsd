@@ -1,13 +1,11 @@
 
-
+###这个文件可以不看了 
 
 
 #sysrc  'slim_enable=YES'   'enlightenment_enable=YES' 'lxde-meta_enable=YES'  
 
 
-1.# set time
- ntpdate cn.pool.ntp.org
- 
+
  
  
  
@@ -97,9 +95,9 @@ Message from mate-1.12.0:
 **************************************************************************
 
 
-5. pkg install  git  sudo   #wqy 
 
-#echo 'evan ALL=(ALL) NOPASSWD:NOPASSWD:ALL' >/etc/sudoers.d/evan
+
+
 
 
 
@@ -159,11 +157,6 @@ fcitx-unikey - A Vietnamese IME using the Unikey engine.[3]
 
 
 
-6. ide 
- pkg install intellij-pycharm
-
-
-/usr/local/bin/python2
 
 Message from libinotify-20160505:
 ============================================================================
