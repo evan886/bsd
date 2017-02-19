@@ -1,5 +1,5 @@
 
-FreeBSD11 桌面化
+FreeBSD11桌面初始化
 Installing a Desktop Environment on FreeBSD
 
 
@@ -76,15 +76,10 @@ export GTK3_IM_MODULE=fcitx
  mkdir -p ~/.config/autostart/
 cp /usr/local/share/applications/fcitx.desktop     ~/.config/autostart/
 
-
-
 == ops and develop  ==
-pkg install git  rsync sudo vim bash   terminal
+pkg install git  rsync sudo vim bash   terminal anjuta vsftp 
 
 echo 'evan ALL=(ALL) NOPASSWD:NOPASSWD:ALL' >/usr/local/etc/sudoers.d/evan
-
-
-
 
 pkg install  python
 https://docs.python.org/2.7/using/unix.html
@@ -93,7 +88,6 @@ https://docs.python.org/3.3/using/unix.html
 6. python  ide 
  pkg install python  intellij-pycharm
 ln -s /usr/local/bin/python2  /usr/bin/python
-
 
 
 faded
@@ -135,12 +129,32 @@ chsh: user information updated
 
 
 
+#anjuta
+===========================================================================
+Note that some standard Python modules are provided as separate ports
+as they require additional dependencies. They are available as:
+
+py35-gdbm       databases/py35-gdbm
+py35-sqlite3    databases/py35-sqlite3
+py35-tkinter    x11-toolkits/py35-tkinter
+===========================================================================
+
 
 
 === 影音=== 
 pkg install vlc 
 
 
+
+== ftp ==
+自带了ftp 
+FreeBSD includes FTP server software, ftpd, in the base system.
+https://www.freebsd.org/doc/en/books/handbook/network-ftp.html
+
+
+字体 
+cd /usr/ports/x11-fonts/wqy
+make install clean
 
 fstab 
 evan@homebsd:~/kalibak % cat /etc/fstab 
@@ -308,8 +322,7 @@ https://github.com/ibus/ibus
 
 
 
-==ops==
-pkg install rsync  
+
 
 
 
@@ -530,58 +543,11 @@ export LC_ALL=zh_CN.UTF-8
 http://blog.shaogroup.com/freebsd-8-1%E6%A1%8C%E9%9D%A2%E5%AE%89%E8%A3%85gnome2-3-%E5%B9%B6%E4%BD%BF%E7%94%A8ibus%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5%E6%B3%95.html
 
 
-IBus
-IBus is a modern IME for Unix-like systems, allowing one to input CJK languages. Install the main IME from textproc/ibus as well as QT application support from textproc/ibus-qt.
-
-You’ll need one or more input methods once the IME itself is installed. Ports of interest:
-
-chinese/ibus-chewing - Chewing engine for IBus
-chinese/ibus-pinyin - The PinYin input method
-japanese/ibus-anthy - Anthy engine for IBus
-japanese/ibus-mozc - Mozc engine for IBus
-japanese/ibus-skk - SKK engine for IBus
-korean/ibus-hangul - Hangul engine for IBus
-textproc/ibus-kmfl - KMFL IMEngine for IBus framework
-textproc/ibus-m17n - The m17n IMEngine for IBus framework
-textproc/ibus-table - Table based IM framework for IBus
-Heavyweight desktop environments like GNOME or KDE will let you configure the input method graphically. In GNOME 2 and MATE, for example, you can open the IBus preferences from the Settings > Preferences menu. KDE/Qt users can enable it as the default IME in qtconfig-qt4.
-
-Lightweight window manager users like me can start it in .xinitrc:
-
-~/.xinitrc
-export XMODIFIERS="@im=ibus"
-export GTK_IM_MODULE="ibus"
-export QT_IM_MODULE="ibus"
-exec ibus-daemon -d -x &
-
-
-http://www.freshports.org/textproc/ibus
 
 https://cooltrainer.org/a-freebsd-desktop-howto/
 
 FreeBSD 10.1 安装 mate 配置
 http://www.jianshu.com/p/29ec115d1688#
-
-
-# ee ~/.xinitrc
-export lANG="zh_CN.UTF-8"
-export LC_ALL="zh_CN.UTF-8"
-export LC_CTYPE="zh_CN.UTF-8"
-export LC_COLLATE="zh_CN.UTF-8"
-export LC_TIME="zh_CN.UTF-8"
-export LC_NUMERIC="zh_CN.UTF-8"
-export LC_MONETARY="zh_CN.UTF-8"
-export LC_MESSAGES="zh_CN.UTF-8"
-exec mate-session
-
-//配置 cshrc 文件
-# ee .cshrc
-setenv XIM ibus
-setenv GTK_IM_MODULE ibus
-setenv QT_IM_MODULE xim
-setenv XMODIFIERS @im=ibus
-setenv XIM_PROGRAM ibus-daemon
-setenv XIM_ARGS "--daemonize --xim"
 
 
 **************
@@ -755,6 +721,17 @@ https://www.enlightenment.org/distros/freebsd-start
 https://www.freebsd.org/doc/zh_CN.UTF-8/books/handbook/updating-upgrading-portsnap.html
 
 https://www.trueos.org/handbook/preinstall.html
+
+
+kali 开机进入不了图形界面 
+自己ssh 上去  一看 / 100%了 
+自己写死了自己 我就说嘛 怎么自己坏了呢 
+
+# m h  dom mon dow   command
+*/5 * * * * /usr/sbin/iotop -o   -b  >> /root/iotop.txt
+
+rm -rf iotop.txt
+
 
 
 
