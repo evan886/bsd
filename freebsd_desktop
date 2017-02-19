@@ -156,6 +156,29 @@ https://www.freebsd.org/doc/en/books/handbook/network-ftp.html
 cd /usr/ports/x11-fonts/wqy
 make install clean
 
+
+编辑/usr/local/etc/fonts/conf.d/85-wqy.conf这个文件，找到下面这两行（应该在第99、100行）：
+
+
+<test name="size" compare="less_eq"><int>16</int></test>
+<edit name="antialias" mode="assign"><bool>false</bool></edit>
+把less_eq后面的int值从16改成8即可。这两行的意思是对于所有小于16号的字体都禁用抗锯齿（match居然写的target=”font”，匹配了所有字体），一个最简单的workaround就是把禁用抗锯齿的字号改小一点，8号是个不错的值，因为太小的字用抗锯齿反而会模糊。
+
+这样字体就美美的 
+
+https://www.librehat.com/solve-freebsd-dragonflybsd-font-antialiasing-settings-invalid-issues/
+https://www.freebsdchina.org/forum/viewtopic.php?p=291166&sid=3b2dad0b46fafdb9a54757d673fef516
+
+
+
+
+
+
+
+
+
+
+
 fstab 
 evan@homebsd:~/kalibak % cat /etc/fstab 
 # Device	Mountpoint	FStype	Options	Dump	Pass#
