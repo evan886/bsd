@@ -142,7 +142,9 @@ py35-tkinter    x11-toolkits/py35-tkinter
 
 
 === 影音=== 
-pkg install vlc 
+pkg install vlc audacious   multimedia/audacious-plugins archivers/unzip
+
+
 
 
 
